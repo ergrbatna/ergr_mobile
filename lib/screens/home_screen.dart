@@ -147,7 +147,7 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 const Text(
-                  'Achivment',
+                  'Réalisation',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -155,7 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(height: 20),
                 const Text(
-                  'Are You Sure You Want To Sent This:',
+                  'Êtes-vous sûr de vouloir envoyer ceci :',
                   style: TextStyle(
                     fontSize: 18,
                   ),
@@ -169,9 +169,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     Text('• Baladya : $selectedBaladya'),
                     const SizedBox(height: 10),
                     Text('• Plant : $selectedPlant'),
-                    Text('• Quantity : ${_quantityController.text}'),
+                    Text('• Quantité : ${_quantityController.text}'),
                     Text(
-                        '• Space : ${_spaceController.text} ${isHA ? "HA" : "KM"}'),
+                        '• Espace : ${_spaceController.text} ${isHA ? "HA" : "KM"}'),
                     if (_noteController.text.isNotEmpty)
                       Text('• Note : ${_noteController.text}'),
                   ],
@@ -351,7 +351,7 @@ ${_noteController.text.isNotEmpty ? '\n💬 Note: ${_noteController.text}' : ''}
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Welcome ${widget.userName}',
+                        'Bienvenue ${widget.userName}',
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 20,
@@ -390,7 +390,7 @@ ${_noteController.text.isNotEmpty ? '\n💬 Note: ${_noteController.text}' : ''}
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          'Location Details',
+                          'Détails de l\'emplacement',
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -513,7 +513,7 @@ ${_noteController.text.isNotEmpty ? '\n💬 Note: ${_noteController.text}' : ''}
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          'Plant Information',
+                          'Informations sur la plante',
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -524,7 +524,7 @@ ${_noteController.text.isNotEmpty ? '\n💬 Note: ${_noteController.text}' : ''}
                         DropdownButtonFormField<String>(
                           value: selectedPlant,
                           decoration: InputDecoration(
-                            labelText: 'Plant Name',
+                            labelText: 'Nom de la plante',
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: const BorderSide(color: Colors.purple),
@@ -553,7 +553,7 @@ ${_noteController.text.isNotEmpty ? '\n💬 Note: ${_noteController.text}' : ''}
                         TextFormField(
                           controller: _quantityController,
                           decoration: InputDecoration(
-                            labelText: 'Quantity',
+                            labelText: 'Quantité',
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
@@ -582,7 +582,7 @@ ${_noteController.text.isNotEmpty ? '\n💬 Note: ${_noteController.text}' : ''}
                               child: TextFormField(
                                 controller: _spaceController,
                                 decoration: InputDecoration(
-                                  labelText: 'Space (Optional)',
+                                  labelText: 'Espace (Optionnel)',
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
                                   ),
@@ -663,7 +663,7 @@ ${_noteController.text.isNotEmpty ? '\n💬 Note: ${_noteController.text}' : ''}
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          'Additional Information',
+                          'Informations supplémentaires',
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -721,7 +721,7 @@ ${_noteController.text.isNotEmpty ? '\n💬 Note: ${_noteController.text}' : ''}
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Text(
-                                    'Submit',
+                                    'Soumettre',
                                     style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
@@ -747,7 +747,7 @@ ${_noteController.text.isNotEmpty ? '\n💬 Note: ${_noteController.text}' : ''}
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_selectedIndex == 0 ? 'ERGR Company' : 'Messages'),
+        title: Text(_selectedIndex == 0 ? 'Société ERGR' : 'Messages'),
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
@@ -773,7 +773,7 @@ ${_noteController.text.isNotEmpty ? '\n💬 Note: ${_noteController.text}' : ''}
           NavigationDestination(
             icon: Icon(Icons.home_outlined),
             selectedIcon: Icon(Icons.home),
-            label: 'Home',
+            label: 'Accueil',
           ),
           NavigationDestination(
             icon: Icon(Icons.message_outlined),

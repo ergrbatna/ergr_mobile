@@ -179,7 +179,7 @@ class MessagesScreen extends StatelessWidget {
                 child: TextField(
                   controller: messagesController.messageController,
                   decoration: InputDecoration(
-                    hintText: 'Type a message...',
+                    hintText: 'Tapez un message...',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(25),
                     ),

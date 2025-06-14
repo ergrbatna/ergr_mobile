@@ -1,19 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/auth_controller.dart';
+import '../config/supabase_config.dart';
 import 'home_screen.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final identifierController = TextEditingController();
-    final passwordController = TextEditingController();
-    final formKey = GlobalKey<FormState>();
-    final authController = Get.find<AuthController>();
-    final isPasswordVisible = false.obs;
+  State<LoginScreen> createState() => _LoginScreenState();
+}
 
+class _LoginScreenState extends State<LoginScreen> {
+  final identifierController = TextEditingController();
+  final passwordController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+  final isPasswordVisible = false.obs;
+  late final AuthController authController;
+  List<String> adminPhones = [];
+
+  @override
+  void initState() {
+    super.initState();
+    authController = Get.find<AuthController>();
+    fetchAdminPhones();
+  }
+
+  Future<void> fetchAdminPhones() async {
+    try {
+      final response = await SupabaseConfig.client
+          .from('users')
+          .select('mobile_number')
+          .eq('is_admin', true);
+      setState(() {
+        adminPhones = List<String>.from(
+          response.map((e) => e['mobile_number'].toString()),
+        );
+      });
+    } catch (e) {
+      // Optionally handle error
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       body: SafeArea(
@@ -27,6 +57,8 @@ class LoginScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const SizedBox(height: 40),
+                 
+                  const SizedBox(height: 16),
                   // Logo or Company Name
                   Container(
                     padding: const EdgeInsets.all(20),
@@ -50,7 +82,7 @@ class LoginScreen extends StatelessWidget {
                   const SizedBox(height: 24),
                   // Company Name
                   const Text(
-                    'ERGR Company',
+                    'Société ERGR',
                     style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
@@ -61,7 +93,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Welcome Back',
+                    'Bienvenue',
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.grey[600],
@@ -86,7 +118,7 @@ class LoginScreen extends StatelessWidget {
                     child: TextFormField(
                       controller: identifierController,
                       decoration: InputDecoration(
-                        labelText: 'Username or Email',
+                        labelText: 'Nom d\'utilisateur ou Email',
                         prefixIcon: const Icon(Icons.person_outline,
                             color: Colors.purple),
                         border: OutlineInputBorder(
@@ -99,7 +131,7 @@ class LoginScreen extends StatelessWidget {
                             horizontal: 20, vertical: 16),
                       ),
                       validator: (value) => value?.isEmpty == true
-                          ? 'Please enter your username or email'
+                          ? 'Veuillez entrer votre nom d\'utilisateur ou email'
                           : null,
                     ),
                   ),
@@ -121,7 +153,7 @@ class LoginScreen extends StatelessWidget {
                           controller: passwordController,
                           obscureText: !isPasswordVisible.value,
                           decoration: InputDecoration(
-                            labelText: 'Password',
+                            labelText: 'Mot de passe',
                             prefixIcon: const Icon(Icons.lock_outline,
                                 color: Colors.purple),
                             suffixIcon: IconButton(
@@ -143,7 +175,7 @@ class LoginScreen extends StatelessWidget {
                                 horizontal: 20, vertical: 16),
                           ),
                           validator: (value) => value?.isEmpty == true
-                              ? 'Please enter your password'
+                              ? 'Veuillez entrer votre mot de passe'
                               : null,
                         )),
                   ),
@@ -183,8 +215,8 @@ class LoginScreen extends StatelessWidget {
                                           ));
                                     } else {
                                       Get.snackbar(
-                                        'Error',
-                                        'Invalid username or password',
+                                        'Erreur',
+                                        'Nom d\'utilisateur ou mot de passe invalide',
                                         backgroundColor: Colors.red[100],
                                         colorText: Colors.red[900],
                                         snackPosition: SnackPosition.TOP,
@@ -214,9 +246,9 @@ class LoginScreen extends StatelessWidget {
                                     color: Colors.white,
                                   ),
                                 )
-                              : const Text(
-                                  'Login',
-                                  style: TextStyle(
+                              : Text(
+                                  'Connexion',
+                                  style: const TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
                                     letterSpacing: 1.5,
@@ -247,7 +279,7 @@ class LoginScreen extends StatelessWidget {
                             Icon(Icons.info_outline, color: Colors.blue[700]),
                             const SizedBox(width: 8),
                             Text(
-                              'Forgot Password?',
+                              'Mot de passe oublié ?',
                               style: TextStyle(
                                 color: Colors.blue[700],
                                 fontWeight: FontWeight.bold,
@@ -257,22 +289,37 @@ class LoginScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          'Contact Admin:',
+                          'Contacter l\'administrateur :',
                           style: TextStyle(
                             color: Colors.grey[600],
                             fontSize: 14,
                           ),
                         ),
                         const SizedBox(height: 4),
-                        Text(
-                          '0790442025',
-                          style: TextStyle(
-                            color: Colors.blue[700],
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            letterSpacing: 1,
+                        if (adminPhones.isEmpty)
+                          const Text(
+                            'Aucun numéro disponible',
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              letterSpacing: 1,
+                            ),
+                          )
+                        else
+                          Column(
+                            children: adminPhones
+                                .map((phone) => Text(
+                                      "0$phone",
+                                      style: TextStyle(
+                                        color: Colors.blue[700],
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        letterSpacing: 1,
+                                      ),
+                                    ))
+                                .toList(),
                           ),
-                        ),
                       ],
                     ),
                   ),
