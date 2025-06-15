@@ -13,11 +13,12 @@ class AuthController extends GetxController {
   Future<bool> login(String identifier, String password) async {
     try {
       _isLoading.value = true;
-      
+
       final response = await SupabaseConfig.client
           .from('users')
           .select()
           .or('full_name.ilike.${identifier},email.ilike.${identifier}')
+          .eq('Active', true)
           .eq('password', password)
           .eq('is_admin', false)
           .limit(1);
@@ -41,4 +42,4 @@ class AuthController extends GetxController {
     _userId.value = '';
     _userName.value = '';
   }
-} 
+}
