@@ -4,6 +4,7 @@ import '../config/supabase_config.dart';
 import '../controllers/messages_controller.dart';
 import 'messages_screen.dart';
 import 'login_screen.dart';
+import 'package:collection/collection.dart';
 
 class HomeScreen extends StatefulWidget {
   final String userName;
@@ -38,6 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<String> plants = [];
 
   late final MessagesController _messagesController;
+  // final GlobalKey<_MessagesListViewState> _listKey = GlobalKey();
 
   @override
   void initState() {
@@ -234,7 +236,7 @@ class _HomeScreenState extends State<HomeScreen> {
         await SupabaseConfig.client.from('history').insert({
           'plant_name': selectedPlant,
           'quantity': _quantityController.text,
-          'space': space,  // This will now be 'N/A' if space is not provided
+          'space': space, // This will now be 'N/A' if space is not provided
           'wilaya': selectedWilaya,
           'dayra': selectedDayra,
           'baladya': selectedBaladya,
@@ -404,15 +406,18 @@ ${_noteController.text.isNotEmpty ? '\n💬 Note: ${_noteController.text}' : ''}
                             labelText: 'Wilaya',
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(color: Colors.purple),
+                              borderSide:
+                                  const BorderSide(color: Colors.purple),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide(color: Colors.purple.withOpacity(0.5)),
+                              borderSide: BorderSide(
+                                  color: Colors.purple.withOpacity(0.5)),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(color: Colors.purple, width: 2),
+                              borderSide: const BorderSide(
+                                  color: Colors.purple, width: 2),
                             ),
                           ),
                           items: wilayas.map((wilaya) {
@@ -437,15 +442,18 @@ ${_noteController.text.isNotEmpty ? '\n💬 Note: ${_noteController.text}' : ''}
                             labelText: 'Dayra',
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(color: Colors.purple),
+                              borderSide:
+                                  const BorderSide(color: Colors.purple),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide(color: Colors.purple.withOpacity(0.5)),
+                              borderSide: BorderSide(
+                                  color: Colors.purple.withOpacity(0.5)),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(color: Colors.purple, width: 2),
+                              borderSide: const BorderSide(
+                                  color: Colors.purple, width: 2),
                             ),
                           ),
                           items: dayras.map((dayra) {
@@ -470,15 +478,18 @@ ${_noteController.text.isNotEmpty ? '\n💬 Note: ${_noteController.text}' : ''}
                             labelText: 'Baladya',
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(color: Colors.purple),
+                              borderSide:
+                                  const BorderSide(color: Colors.purple),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide(color: Colors.purple.withOpacity(0.5)),
+                              borderSide: BorderSide(
+                                  color: Colors.purple.withOpacity(0.5)),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(color: Colors.purple, width: 2),
+                              borderSide: const BorderSide(
+                                  color: Colors.purple, width: 2),
                             ),
                           ),
                           items: baladyas.map((baladya) {
@@ -527,15 +538,18 @@ ${_noteController.text.isNotEmpty ? '\n💬 Note: ${_noteController.text}' : ''}
                             labelText: 'Nom de la plante',
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(color: Colors.purple),
+                              borderSide:
+                                  const BorderSide(color: Colors.purple),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide(color: Colors.purple.withOpacity(0.5)),
+                              borderSide: BorderSide(
+                                  color: Colors.purple.withOpacity(0.5)),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(color: Colors.purple, width: 2),
+                              borderSide: const BorderSide(
+                                  color: Colors.purple, width: 2),
                             ),
                           ),
                           items: plants.map((plant) {
@@ -559,13 +573,16 @@ ${_noteController.text.isNotEmpty ? '\n💬 Note: ${_noteController.text}' : ''}
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide(color: Colors.purple.withOpacity(0.5)),
+                              borderSide: BorderSide(
+                                  color: Colors.purple.withOpacity(0.5)),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(color: Colors.purple, width: 2),
+                              borderSide: const BorderSide(
+                                  color: Colors.purple, width: 2),
                             ),
-                            prefixIcon: const Icon(Icons.numbers, color: Colors.purple),
+                            prefixIcon:
+                                const Icon(Icons.numbers, color: Colors.purple),
                           ),
                           keyboardType: TextInputType.number,
                           validator: (value) {
@@ -588,13 +605,16 @@ ${_noteController.text.isNotEmpty ? '\n💬 Note: ${_noteController.text}' : ''}
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide(color: Colors.purple.withOpacity(0.5)),
+                                    borderSide: BorderSide(
+                                        color: Colors.purple.withOpacity(0.5)),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
-                                    borderSide: const BorderSide(color: Colors.purple, width: 2),
+                                    borderSide: const BorderSide(
+                                        color: Colors.purple, width: 2),
                                   ),
-                                  prefixIcon: const Icon(Icons.space_bar, color: Colors.purple),
+                                  prefixIcon: const Icon(Icons.space_bar,
+                                      color: Colors.purple),
                                 ),
                                 keyboardType: TextInputType.number,
                               ),
@@ -602,13 +622,15 @@ ${_noteController.text.isNotEmpty ? '\n💬 Note: ${_noteController.text}' : ''}
                             const SizedBox(width: 16),
                             Container(
                               decoration: BoxDecoration(
-                                border: Border.all(color: Colors.purple.withOpacity(0.5)),
+                                border: Border.all(
+                                    color: Colors.purple.withOpacity(0.5)),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Column(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0),
                                     child: Row(
                                       children: [
                                         Radio<bool>(
@@ -623,7 +645,8 @@ ${_noteController.text.isNotEmpty ? '\n💬 Note: ${_noteController.text}' : ''}
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0),
                                     child: Row(
                                       children: [
                                         Radio<bool>(
@@ -680,13 +703,16 @@ ${_noteController.text.isNotEmpty ? '\n💬 Note: ${_noteController.text}' : ''}
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide(color: Colors.purple.withOpacity(0.5)),
+                              borderSide: BorderSide(
+                                  color: Colors.purple.withOpacity(0.5)),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(color: Colors.purple, width: 2),
+                              borderSide: const BorderSide(
+                                  color: Colors.purple, width: 2),
                             ),
-                            prefixIcon: const Icon(Icons.note, color: Colors.purple),
+                            prefixIcon:
+                                const Icon(Icons.note, color: Colors.purple),
                           ),
                           maxLines: 4,
                         ),
@@ -702,7 +728,8 @@ ${_noteController.text.isNotEmpty ? '\n💬 Note: ${_noteController.text}' : ''}
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.purple,
                           foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 32, vertical: 16),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
                           ),
